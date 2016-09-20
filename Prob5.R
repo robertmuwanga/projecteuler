@@ -9,12 +9,17 @@
 # by all of the numbers from 1 to 20?
 ###
 
-rj <- function() {
-    x <- 1:20
+ans <- function(n) {
+    if(length(n) == 1) n
     
-    getrange <- function() x
-    
-    updateRange <- function(startIndex, n) {
-        x <- c(x[1:startIndex-1], x[startIndex:length(x)])
+    else {
+        h <- head(n , 1)
+        h * ans(as.integer(
+                sapply(tail(n, -1), function(x) {
+                    if(x %% h == 0) x / h
+                    else x
+        })))
     }
 }
+
+ans(1:20)
