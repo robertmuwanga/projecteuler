@@ -7,12 +7,14 @@
 #
 ###
 
+check.packages <- function() {
+    if(!('gmp' %in% installed.packages())) install.packages('gmp')
+    
+    require('gmp')
+}
+
 ans <- function(x) {
-  if(x == 1)
-  {
-    x
-  }
-  else {
-    max(x[1], ans(sapply(x[-1], function(y) { if(y %% x[1] == 0) y / x[1] else y})))
-  }
+    if(!check.packages()) stop("gmp package cannot be installed / loaded.")
+    
+    tail(factorize(x), 1)
 }
